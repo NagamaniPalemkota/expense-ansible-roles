@@ -6,18 +6,18 @@
 - name: start and enable nginx
   ansible.builtin.service:
     name: nginx
-    state:  started
-    enabled:  yes
+    state: started
+    enabled: yes
 
 - name: delete default directory of html
   ansible.builtin.file:
     path: /usr/share/nginx/html
-    state:  absent
+    state: absent
 
 - name: creating the directory html
   ansible.builtin.file:
     path: /usr/share/nginx/html
-    state:  directory     #state shoukd be directory for creating the same
+    state: directory     #state shoukd be directory for creating the same
 
 - name: download and unarchive the code in html folder of remote server
   ansible.builtin.unarchive:
@@ -27,7 +27,7 @@
 
 - name: copy expense.conf (backend conf) to frontend server
   ansible.builtin.template:
-    src:  expense.conf.j2 
+    src: expense.conf.j2 
     dest: /etc/nginx/default.d/expense.conf 
   notify:
   - restart nginx
