@@ -17,11 +17,15 @@
     name: expense
 
 - name: using common role for creating app folder
+  tags:
+  - deployment  #deployment related
   ansible.builtin.import_role:
     name: common
     tasks_from: common_code
 
 - name: install dependencies
+  tags:
+  - deployment #deployment related
   ansible.builtin.command: npm install
   args:
     chdir:  /app #we're asking to change to /app and then, execute this install cmd using args option
@@ -59,6 +63,8 @@
     enabled: yes
 
 - name: restart backend service
+  tags:
+  - deployment
   ansible.builtin.service:
     name: backend
     state: restarted
