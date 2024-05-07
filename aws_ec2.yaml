@@ -1,3 +1,10 @@
 plugin: amazon.aws.aws_ec2
 regions:
 - us-east-1
+keyed_groups:
+- key: tags['Name']
+filters:
+  tag:Name: "Backend*"
+
+compose:  It sets the private ip to ansible_host without changing the host name
+  ansible_host: private_ip_address
