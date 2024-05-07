@@ -7,7 +7,7 @@
     amazon.aws.ec2_instance:
       name: "{{ item }}"
       instance_type:  t2.micro
-      security_group: allow_everything
+      security_group: allow-everything
       image_id: ami-090252cbe067a9e58
       tags:
         Name: "{{ item }}"
@@ -16,6 +16,10 @@
     - backend
     - frontend
     register: ec2_instanes_output
+
+  - name: printing the output
+    ansible.builtin.debug:
+      msg: "output is {{ ec2_instanes_output }}"
 
   # - name: creating r53 records
   #   amazon.aws.route53:
