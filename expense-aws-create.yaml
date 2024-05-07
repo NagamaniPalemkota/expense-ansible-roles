@@ -15,8 +15,7 @@
       image_id: ami-090252cbe067a9e58
       tags:
         Name: "{{ instances }}"
-    loop:
-    - "{{ instances }}"
+    loop:"{{ instances }}"
     register: ec2_instanes_output
 
   - name: printing the output
