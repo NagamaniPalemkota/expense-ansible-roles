@@ -2,25 +2,35 @@
   hosts: localhost
   vars:
     zone: muvva.online
+    instances:
+    - db
+    - backend
+    - frontend
   tasks:
   - name: create ec2 instances
     amazon.aws.ec2_instance:
-      name: "{{ item }}"
+      name: "{{ instances }}"
       instance_type:  t2.micro
       security_group: allow-everything
       image_id: ami-090252cbe067a9e58
       tags:
-        Name: "{{ item }}"
+        Name: "{{ instances }}"
     loop:
-    - db
-    - backend
-    - frontend
+    - {{ instances}}
     register: ec2_instanes_output
 
   - name: printing the output
     ansible.builtin.debug:
       msg: "output is {{ ec2_instanes_output }}"
 
-  # - name: creating r53 records
-  #   amazon.aws.route53:
-  #     record: 
+  - name: creating r53 records
+    amazon.aws.route53:
+      state: present
+      zone: "{{ zone }}"
+      record: "{{ item }}"."{{ zone }}"
+      type: A
+      value:  "{{ item.private_ip_address }}"
+      ttl:  1
+      overwrite: true
+    loop:
+     - {{ result.instances }}
