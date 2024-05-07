@@ -33,4 +33,4 @@
       ttl:  1
       overwrite: true
     loop:
-     - "{{ ec2_instanes_output.result.instances }}"
+     - "{{ ec2_instanes_output.results.instances }}"
