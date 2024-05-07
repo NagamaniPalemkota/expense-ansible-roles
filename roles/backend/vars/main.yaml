@@ -1,6 +1,5 @@
 login_hostname: db.muvva.online
 login_user: root
-login_pwd: ExpenseApp@1
 DB_HOST: db.muvva.online
 APP_LOCATION: /app
 code_component: backend
