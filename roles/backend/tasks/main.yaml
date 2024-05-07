@@ -34,6 +34,7 @@
   ansible.builtin.template:
     src: backend.service.j2
     dest: /etc/systemd/system/backend.service
+  notify: daemon reloading the service
 
 - name: install mysql-python dependencies
   ansible.builtin.pip:
@@ -52,9 +53,6 @@
     state: import
     name: all #name should be all to mention it to dump all data when dump stateis mentioned
 
-- name: daemon reloading the service
-  ansible.builtin.systemd_service:
-    daemon_reload: true
 
 - name: start and enable backend service
   ansible.builtin.service:
