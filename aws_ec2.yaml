@@ -3,8 +3,12 @@ regions:
 - us-east-1
 keyed_groups:
 - key: tags['Name']
+  prefix: ''
+  parent_group: ''
+
 filters:
   tag:Name: "Backend*"
 
-compose:  It sets the private ip to ansible_host without changing the host name
+
+compose: # It sets the private ip to ansible_host without changing the host name
   ansible_host: private_ip_address
