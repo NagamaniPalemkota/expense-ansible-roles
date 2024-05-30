@@ -2,4 +2,4 @@ login_hostname: db.muvva.online
 login_user: root
 DB_HOST: db.muvva.online
 APP_LOCATION: /app
-code_component: backend
+component: backend
